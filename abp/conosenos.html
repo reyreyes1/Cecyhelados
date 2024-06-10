@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONÓCENOS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        .header img {
+            border-radius: 50%; /* Hacer la imagen circular */
+        } 
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        main {
+            padding: 2em;
+            text-align: center;
+        }
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5em;
+            margin: 2em 0;
+        }
+        .team a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .team button {
+            border: none;
+            background-color: #ffffff;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .team button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .team img {
+            border-radius: 10px;
+            width: 200px;
+            height: 150px;
+        }
+        .page-info {
+            text-align: left;
+            margin: 2em auto;
+            max-width: 800px;
+            background-color: white;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .page-info h2 {
+            font-size: 1.75em;
+            margin-top: 0;
+            color: #007BFF;
+        }
+        .page-info p {
+            margin: 1em 0;
+            font-size: 1.1em;
+        }
+        .review-section {
+            background-color: #ffffff;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 2em auto;
+        }
+        .review-section h2 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+        .review-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .review-section label {
+            margin: 0.5em 0 0.2em 0;
+            width: 100%;
+            text-align: left;
+            font-weight: bold;
+        }
+        .review-section input, .review-section textarea, .review-section select {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .review-section button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 0.7em 1.5em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+        .review-section button:hover {
+            background-color: #0056b3;
+        }
+        .review-section #reviews {
+            margin-top: 2em;
+        }
+        .review-item {
+            background-color: #f5f5f5;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .review-item p {
+            margin: 0;
+        }
+        .review-item .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+        .review-item .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Conócenos</h1>
+       
+        <div class="blue-line"></div>
+    </header>
+    <main>
+        <div class="team">
+            <a href="cesar.html" target="_blank">
+                <button><img src="cesar.jpg" alt="Cesar"></button>
+            </a>
+            <a href="monica.html" target="_blank">
+                <button><img src="monica.jpg" alt="Monica"></button>
+            </a>
+            <a href="jesus.html" target="_blank">
+                <button><img src="jesus.jpg" alt="Jesús"></button>
+            </a>
+            <a href="saulo.html" target="_blank">
+                <button><img src="saulo.jpeg" alt="Saulo"></button>
+            </a>
+            <a href="alma.html" target="_blank">
+                <button><img src="alma.jpg" alt="Alma"></button>
+            </a>
+            <a href="brian.html" target="_blank">
+                <button><img src="brian.jpg" alt="Bryan"></button>
+            </a>
+        </div>
+        <div class="page-info">
+            <h2>Misión</h2>
+            <p>Ofrecer helados deliciosos y de alta calidad utilizando ingredientes frescos y de temporada.
+                Brindar una experiencia de cliente excepcional en un ambiente acogedor y divertido.
+                Ser la heladería preferida de la comunidad estableciendo relaciones duraderas con nuestros clientes.</p>
+            <h2>Visión</h2>
+            <p>Convertirnos en la heladería líder en la región, reconocida por nuestra calidad, innovación y compromiso con la comunidad.
+                Ampliar nuestra oferta de productos para satisfacer las necesidades y preferencias de nuestros clientes.
+                Franquiciar nuestro negocio para compartir nuestra pasión por los helados con el mundo.</p>
+            <h2>Expectativas</h2>
+            <p>Aumentar las ventas en un [porcentaje] anual durante los próximos [número] años.
+                Lograr una tasa de satisfacción del cliente del [porcentaje]% o más.
+                Obtener reconocimiento por nuestra calidad, innovación y compromiso con la comunidad.
+                Desarrollar un equipo altamente calificado y comprometido con el éxito de nuestro negocio.
+                Convertirnos en una empresa sostenible que genere un impacto positivo en el medio ambiente y la comunidad.</p>
+        </div>
+        
+        <div class="review-section">
+            <h2>Deja tu reseña a nuestros desarrolladores 😸</h2>
+            <form id="reviewForm">
+                <label for="username">Nombre:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="review">Reseña:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+                <button type="button" onclick="submitReview()">Publicar</button>
+               </form> 
+               <a href="index.html">
+                    <button style="padding: 10px 20px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Regresar a la pagina de conocenos 😸 
+                    </button>
+            <div id="reviews"></div>
+        </div>
+    </main>
+
+    <script>
+        // Función para guardar una reseña en el almacenamiento local
+        function saveReviewToStorage(username, review) {
+            let reviews = localStorage.getItem('reviews') ? JSON.parse(localStorage.getItem('reviews')) : [];
+
+            reviews.push({ username: username, review: review });
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+        }
+
+        // Función para cargar las reseñas desde el almacenamiento local al cargar la página
+        function initializeReviews() {
+            let reviews = localStorage.getItem('reviews') ? JSON.parse(localStorage.getItem('reviews')) : [];
+            const reviewsContainer = document.getElementById('reviews');
+
+            reviews.forEach((item, index) => {
+                const newReviewItem = document.createElement('div');
+                newReviewItem.classList.add('review-item');
+                newReviewItem.innerHTML = `
+                    <p><strong>${item.username}:</strong> ${item.review}</p>
+                    <button class="delete-button" onclick="deleteReview(${index})">Eliminar</button>
+                `;
+                reviewsContainer.appendChild(newReviewItem);
+            });
+        }
+
+                // Función para enviar una reseña nueva
+                function submitReview() {
+            const username = document.getElementById('username').value;
+            const review = document.getElementById('review').value;
+
+            // Validación básica
+            if (!username || !review) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            // Guardar la reseña en el almacenamiento local
+            saveReviewToStorage(username, review);
+
+            // Limpiar los campos del formulario
+            document.getElementById('username').value = '';
+            document.getElementById('review').value = '';
+
+            // Mostrar la nueva reseña en la interfaz
+            const reviewsContainer = document.getElementById('reviews');
+            const newReviewItem = document.createElement('div');
+            newReviewItem.classList.add('review-item');
+            newReviewItem.innerHTML = `
+                <p><strong>${username}:</strong> ${review}</p>
+                <button class="delete-button" onclick="deleteReview(this)">Eliminar</button>
+            `;
+            reviewsContainer.appendChild(newReviewItem);
+        }
+
+        // Función para eliminar una reseña
+        function deleteReview(index) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta reseña?')) {
+                let reviews = JSON.parse(localStorage.getItem('reviews'));
+                reviews.splice(index, 1);
+                localStorage.setItem('reviews', JSON.stringify(reviews));
+
+                // Actualizar la lista de reseñas en la interfaz
+                renderReviews();
+            }
+        }
+
+        // Función para renderizar las reseñas almacenadas
+        function renderReviews() {
+            const reviewsContainer = document.getElementById('reviews');
+            reviewsContainer.innerHTML = '';
+
+            let reviews = localStorage.getItem('reviews') ? JSON.parse(localStorage.getItem('reviews')) : [];
+
+            reviews.forEach((item, index) => {
+                const newReviewItem = document.createElement('div');
+                newReviewItem.classList.add('review-item');
+                newReviewItem.innerHTML = `
+                    <p><strong>${item.username}:</strong> ${item.review}</p>
+                    <button class="delete-button" onclick="deleteReview(${index})">Eliminar</button>
+                `;
+                reviewsContainer.appendChild(newReviewItem);
+            });
+        }
+
+        // Cargar las reseñas al cargar la página
+        window.onload = function() {
+            initializeReviews();
+        };
+    </script>
+</body>
+</html>
+

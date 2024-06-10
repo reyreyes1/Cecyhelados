@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #3f51b5;
+        }
+        p {
+            font-size: 1em;
+            margin: 0.5em 0;
+        }
+        button {
+            width: 100%;
+            padding: 0.5em;
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1em;
+        }
+        button:hover {
+            background-color: #e68900;
+        }
+    </style>
+    <script>
+        function loadPaymentDetails() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const paymentMethod = JSON.parse(localStorage.getItem('paymentMethod'));
+            const total = JSON.parse(localStorage.getItem('cart')).reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+            document.getElementById('userName').innerText = user.name;
+            document.getElementById('userAddress').innerText = user.address;
+            document.getElementById('cardNumber').innerText = `**** **** **** ${paymentMethod.cardNumber.slice(-4)}`;
+            document.getElementById('totalAmount').innerText = `Total a pagar: $${total.toFixed(2)}`;
+        }
+
+        function confirmPayment() {
+            alert('Pago realizado con éxito. ¡Gracias por su compra!');
+            localStorage.removeItem('cart'); // Limpiar el carrito después del pago
+            window.location.href = 'index.html'; // Redirigir a la página de inicio
+        }
+        window.onload = loadPaymentDetails;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Confirmación de Pago</h2>
+        <p><strong>Nombre:</strong> <span id="userName"></span></p>
+        <p><strong>Dirección:</strong> <span id="userAddress"></span></p>
+        <p><strong>Método de Pago:</strong> <span id="cardNumber"></span></p>
+        <p id="totalAmount"></p>
+        <button onclick="confirmPayment()">Confirmar Pago</button>
+    </div>
+</body>
+</html>

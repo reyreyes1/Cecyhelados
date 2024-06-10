@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compras - CecyHelados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Azul claro */
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #26c6da; /* Azul celeste */
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .header h2 {
+            color: #ffffff;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #b2ebf2;
+            border-radius: 5px;
+            background-color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .cart-item h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .cart-item p {
+            margin: 0;
+            color: #00796b;
+        }
+
+        .total {
+            text-align: center;
+            font-size: 24px;
+            color: #004d40;
+            margin: 20px 0;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #26a69a;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #00796b;
+        }
+
+        /* Estilos para la alerta */
+        @keyframes scaleAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .alert-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: scaleAnimation 0.5s ease-in-out;
+        }
+        .alert-box img {
+            max-width: 100px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const productsDiv = document.getElementById('products');
+            productsDiv.innerHTML = ''; // Limpiar antes de agregar productos
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                
+                const itemImg = document.createElement('img');
+                itemImg.src = "cecyto compra.jpg"; // URL de la imagen del producto
+                
+                const itemInfoDiv = document.createElement('div');
+                const itemName = document.createElement('h3');
+                itemName.innerText = `${item.name} - ${item.quantity} unidad(es)`;
+                
+                const itemPrice = document.createElement('p');
+                const itemTotalPrice = item.price * item.quantity;
+                itemPrice.innerText = `$${itemTotalPrice.toFixed(2)}`;
+                
+                itemInfoDiv.appendChild(itemName);
+                itemInfoDiv.appendChild(itemPrice);
+
+                itemDiv.appendChild(itemImg);
+                itemDiv.appendChild(itemInfoDiv);
+
+                productsDiv.appendChild(itemDiv);
+
+                total += itemTotalPrice;
+            });
+
+            const totalDiv = document.getElementById('total');
+            totalDiv.innerText = `Total: $${total.toFixed(2)}`;
+        }
+
+        function proceedToCheckout() {
+            showAlert("Redirigiendo a la página de pago...", "https://via.placeholder.com/150?text=Pago");
+            setTimeout(() => {
+                window.location.href = "pago.php"; // Redirigir a la página de pago
+            }, 3000);
+        }
+
+        function goBackToMenu() {
+            if (confirm("¿Quieres regresar al menú principal? Se perderán los cambios.")) {
+                showAlert("Regresando al menú principal...", "https://via.placeholder.com/150?text=Menú+principal");
+                setTimeout(() => {
+                    window.location.href = "index.html"; // Redirigir al menú principal
+                }, 3000);
+            }
+        }
+
+        function cancelPurchase() {
+            if (confirm("¿Estás seguro de que deseas cancelar la compra?")) {
+                showAlert("Cancelando la compra...", "https://via.placeholder.com/150?text=Cancelación");
+                setTimeout(() => {
+                    localStorage.removeItem('cart'); // Limpiar el carrito
+                    window.location.href = "index.html"; // Redirigir a la página de inicio
+                }, 3000);
+            }
+        }
+
+        function showAlert(message, imageUrl) {
+            const alertBox = document.createElement('div');
+            alertBox.classList.add('alert-box');
+            
+            const img = document.createElement('img');
+            img.src = "cecyto.jpg";
+            alertBox.appendChild(img);
+            
+            const p = document.createElement('p');
+            p.textContent = message;
+            alertBox.appendChild(p);
+            
+            document.body.appendChild(alertBox);
+
+            setTimeout(() => {
+                alertBox.remove();
+            }, 3000); // Elimina la alerta después de 5 segundos
+        }
+
+        window.onload = loadCart;
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h2>Carrito de compras</h2>
+    </div>
+    <div id="products">
+        <!-- Aquí se agregan los productos del carrito -->
+    </div>
+    <div class="total" id="total">
+        <!-- Aquí se muestra el total del carrito -->
+    </div>
+    <div style="text-align: center;">
+        <button class="button" onclick="proceedToCheckout()">Comprar</button>
+        <button class="button" onclick="cancelPurchase()">Cancelar compra</button>
+        <button class="button" onclick="goBackToMenu()">Regresar al menú principal</button>
+    </div>
+    <audio autoplay loop>
+        <source src="espera.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+</body>
+</html>

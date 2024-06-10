@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helados - CecyHelados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f6fa; /* Fondo gris claro */
+        }
+
+        .header {
+            background-color: #3498db; /* Azul fuerte */
+            padding: 40px;
+            text-align: center;
+            color: white;
+            border-bottom: 5px solid #2980b9; /* Línea inferior más oscura */
+        }.header img {
+            border-radius: 50%; /* Hacer la imagen circular */
+        } 
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .blue-line {
+            height: 5px;
+            background-color: #3498db; /* Línea azul */
+        }
+
+        .container {
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra */
+            margin: 20px auto;
+            border-radius: 10px; /* Bordes redondeados */
+            max-width: 1200px; /* Ancho máximo para limitar la extensión */
+        }
+
+        .helados {
+            text-align: center;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Cuatro columnas */
+            gap: 30px; /* Espacio entre productos */
+        }
+
+        @media (max-width: 900px) {
+            .product-list {
+                grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas más pequeñas */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .product-list {
+                grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+            }
+        }
+
+        .product {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados */
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: transform 0.3s ease; /* Transición suave */
+        }
+
+        .product:hover {
+            transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+        }
+
+        .product img {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 10px; /* Bordes redondeados */
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: #3498db; /* Azul fuerte */
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Cambio de color al pasar el mouse */
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #555; /* Gris oscuro */
+        }
+
+        /* Estilos para la alerta */
+        @keyframes scaleAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .alert-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: scaleAnimation 0.5s ease-in-out;
+        }
+        .alert-box img {
+            max-width: 100px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+         /* Estilos CSS para la imagen del confeti */
+      #confeti {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+    </style>
+
+    <script>
+        function addToCart() {
+            const productForms = document.querySelectorAll('.product-form');
+            const selectedProducts = [];
+            
+            productForms.forEach(form => {
+                const productName = form.querySelector('.product-name').innerText;
+                const quantity = parseInt(form.querySelector('.product-quantity').value, 10);
+                if (quantity > 0) {
+                    selectedProducts.push({ name: productName, quantity, price: parseFloat(form.querySelector('.product-price').innerText.replace('$', '')) });
+                }
+            });
+
+            if (selectedProducts.length === 0) {
+                alert("Por favor, selecciona al menos un producto.");
+                return;
+            }
+
+            localStorage.setItem('cart', JSON.stringify(selectedProducts));
+
+            // Mostrar alerta y redirigir según el producto seleccionado
+            if (selectedProducts.length === 1) {
+                // Mostrar mensaje específico según el producto seleccionado
+                const productName = selectedProducts[0].name;
+                switch (productName) {
+                    case 'helado de nuez 😋':
+                        showAlert("La vida es como un cono de helado, hay que lamerlo día a día 😋", "https://via.placeholder.com/150?text=helado+de+nuez");
+                        break;
+                    case 'helado de galleta😺':
+                        showAlert("Olvídese del arte. Confíe en los helados 😉", "https://via.placeholder.com/150?text=helado+de+galleta");
+                        break;
+                    case 'helado de fresa 😋':
+                        showAlert("Si te gusta el helado, ¿por qué detenerte en una cucharada? Toma dos, toma tres. Demasiado nunca es suficiente 😸", "https://via.placeholder.com/150?text=helado+de+fresa");
+                        break;
+                    case 'helado de limon 😋':
+                        showAlert("No hay nada más refrescante que un delicioso helado en un día caluroso 😎", "https://via.placeholder.com/150?text=helado+de+limon");
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                // Mostrar mensaje genérico si se seleccionan varios productos
+                showAlert("El helado es la respuesta a todas las preguntas importantes de la vida 😊", "https://via.placeholder.com/150?text=Helado");
+            }
+
+            // Redirigir al carrito después de 5 segundos
+            setTimeout(() => {
+                window.location.href = "carrito.html";
+            }, 3000);
+        }
+
+        function showAlert(message, imageUrl) {
+            const alertBox = document.createElement('div');
+            alertBox.classList.add('alert-box');
+            
+            const img = document.createElement('img');
+            img.src = "cecyto.jpg";
+            alertBox.appendChild(img);
+            
+            const p = document.createElement('p');
+            p.textContent = message;
+            alertBox.appendChild(p);
+            
+            document.body.appendChild(alertBox);
+
+            setTimeout(() => {
+                alertBox.remove();
+            }, 3000); // Elimina la alerta después de 5 segundos
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>CecyHelados</h1>
+        <img src="logo.jpg" alt="Logo" width="100" height="100" />
+        <div class="blue-line"></div>
+    </div>
+    <div class="container">
+        <div class="helados">
+            <h2>Helados</h2>
+            <div class="product-list">
+                <div class="product-form product">
+                    <img src="https://th.bing.com/th/id/OIP.FkqXt_UdGeVKYxBth1rdSAAAAA?w=239&h=180&c=7&r=0&o=5&pid=1.7" alt="Helado de Bote 1">
+                    <p class="product-name">helado de nuez 😋</p>
+                    <p class="product-price">$10.00</p>
+                    <input type="number" min="0" class="product-quantity" value="0" step="1" />
+                </div>
+                <div class="product-form product">
+                    <img src="https://th.bing.com/th/id/OIP.nkaUKOP_Eg_pvUDMVzYbaAHaE8?w=262&h=180&c=7&r=0&o=5&pid=1.7" alt="Helado de Bote 2">
+                    <p class="product-name">helado de galleta😺</p>
+                    <p class="product-price">$15.00</p>
+                    <input type="number" min="0" class="product-quantity" value="0" step="1" />
+                </div>
+                <div class="product-form product">
+                    <img src="https://th.bing.com/th/id/OIP.cvqRcVRBWa1Q9Md-uOwKNAHaE8?w=286&h=191&c=7&r=0&o=5&pid=1.7" alt="Helado de Bote 3">
+                    <p class="product-name">helado de fresa 😋</p>
+                    <p class="product-price">$25.00</p>
+                    <input type="number" min="0" class="product-quantity" value="0" step="1" />
+                </div>
+                <div class="product-form product">
+                    <img src="https://th.bing.com/th/id/OIP.seQ9nklnHszCvCZ3idBcHwHaEk?w=277&h=180&c=7&r=0&o=5&pid=1.7" alt="Helado de Bote 4">
+                    <p class="product-name">helado de limon 😋</p>
+                    <p class="product-price">$5.00</p>
+                    <input type="number" min="0" class="product-quantity" value="0" step="1" />
+                </div>
+            </div>
+            <button onclick="addToCart()">Añadir al carrito</button>
+        <a href="index.html">
+            <button style="padding: 10px 20px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Regresar a la pagina de inicio 😸 
+            </button>
+        </a>
+        </div>
+    </div>
+    <audio autoplay loop>
+        <source src="fnaf-sister-location-ost-turtle-crusher-128-ytshorts.savetube.me.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+    <img id="confeti" src="cecyto.jpg" alt="Confeti">
+    
+    <!-- Script para mostrar confeti al hacer clic en la imagen -->
+    <script>
+        document.getElementById("confeti").addEventListener("click", function() {
+            for (let i = 0; i < 10; i++) { // Crear 10 confetis
+                setTimeout(function() {
+                    var confeti = document.createElement("div");
+                    confeti.classList.add("confeti");
+                    document.body.appendChild(confeti);
+                    confeti.style.left = Math.random() * window.innerWidth + "px"; // Posición horizontal aleatoria
+                    confeti.style.animationDelay = Math.random() * 2 + "s"; // Retardo aleatorio de la animación
+                }, i * 200); // Intervalo de tiempo entre la creación de cada confeti
+            }
+        });
+    </script>
+    
+    <!-- Estilos CSS para los elementos de confeti -->
+    <style>
+        .confeti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0000; /* Color del confeti */
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: caidaConfeti 5s ease-out forwards;
+        }
+    
+        @keyframes caidaConfeti {
+            0% {
+                transform: translateY(-100vh); /* Comienza desde arriba de la ventana */
+            }
+            100% {
+                transform: translateY(100vh); /* Termina abajo de la ventana */
+            }
+        }
+    </style>
+</body>
+</html>
